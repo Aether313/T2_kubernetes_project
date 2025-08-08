@@ -68,7 +68,7 @@ def main():
 
     # 9. Save the cleaned CSV
     df_cleaned.to_csv('imdb_rating_cleaned.csv', index=False, encoding='utf-8-sig')
-    print("✅ Cleaning complete. File saved as imdb_rating_cleaned.csv")
+    print("Cleaning complete. File saved as imdb_rating_cleaned.csv")
 
 if __name__ == "__main__":
     print("Running cleaning script...")
