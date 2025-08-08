@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: imdb-cleaner
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: imdb-cleaner
+  template:
+    metadata:
+      labels:
+        app: imdb-cleaner
+    spec:
+      containers:
+      - name: cleaner
+        image: imdb-cleaner:latest
+        imagePullPolicy: Never   # use "IfNotPresent" or remove if using from DockerHub
+        volumeMounts:
+        - name: data-volume
+          mountPath: /app/data
+      volumes:
+      - name: data-volume
+        emptyDir: {}  # Or use a PersistentVolume if needed
