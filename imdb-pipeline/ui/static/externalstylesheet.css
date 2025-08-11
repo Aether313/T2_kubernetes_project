@@ -1,0 +1,23 @@
+body {
+    width: 1024px;
+    height: 600px;
+    background-color: pink;
+}
+
+h1.header {
+  padding-left: 55px;
+}
+
+div.block1{
+  width: 570px;
+  border: 2px solid black;
+  margin-left: 500px;
+  height: 600px;
+  margin-top: 40px;
+  background-color: beige;
+}
+
+form.input{
+  padding-left: 190px;
+  padding-top: 30px;
+}
