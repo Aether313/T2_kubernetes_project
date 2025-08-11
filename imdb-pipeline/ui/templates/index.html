@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='externalstylesheet.css') }}">
+</head>
+<body>
+<div class="block1">
+    <h1 class="header">IMDb score prediction application</h1>
+
+    <form class="input" method="POST" action="/">
+
+      <label for="genre">Genre:</label>
+      <select id="genre" name="genre">
+        <option value="Action">Action</option>
+        <option value="Adult">Adult</option>
+        <option value="Adventure">Adventure</option>
+        <option value="Adventure">Animation</option>
+        <option value="Action">Biography</option>
+        <option value="Adult">Comedy</option>
+        <option value="Adventure">Crime</option>
+        <option value="Action">Documentary</option>
+        <option value="Adult">Drama</option>
+        <option value="Adventure">Family</option>
+        <option value="Adventure">Fantasy</option>
+        <option value="Action">Film-Noir</option>
+        <option value="Adult">Game-Show</option>
+        <option value="Adventure">History</option>
+        <option value="Action">Horror</option>
+        <option value="Adult">Music</option>
+        <option value="Adventure">Musical</option>
+        <option value="Adventure">Mystery</option>
+        <option value="Action">News</option>
+        <option value="Adult">Reality-TV</option>
+        <option value="Adventure">Romance</option>
+        <option value="Action">Sci-Fi</option>
+        <option value="Adult">Short</option>
+        <option value="Adventure">Sport</option>
+        <option value="Adventure">Talk-Show</option>
+        <option value="Action">Thriller</option>
+        <option value="Adult">War</option>
+        <option value="Adventure">Western</option>
+      </select>
+
+      <br><br>
+
+      <label for="runtime">Runtime (minutes):</label><br>
+      <input type="number" id="runtime" name="runtime" min="1" required>
+
+      <br><br>
+
+      <label for="language">Language:</label><br>
+      <input type="text" id="language" name="language" required>
+
+      <br><br>
+
+      <label for="director">Director:</label><br>
+      <input type="text" id="director" name="director" required>
+
+      <br><br>
+
+      <label for="writer">Writer:</label><br>
+      <input type="text" id="writer" name="writer" required>
+
+      <br><br>
+
+      <label for="production">Production House:</label><br>
+      <input type="text" id="production" name="production" required>
+
+      <br><br>
+
+      <button type="submit">Predict IMDb Score</button>
+    </form>
+
+    {% if score %}
+      <h2>Predicted IMDb Score: {{ score }}</h2>
+    {% endif %}
+
+</div>
+</body>
+</html>
+
