@@ -1,9 +1,10 @@
 import pandas as pd
 import numpy as np
+import os
 
-def main():
+def clean_file(input_path, output_path):
     # Read the CSV file with UTF-8-SIG encoding
-    df = pd.read_csv('imdb_rating.csv', encoding='utf-8-sig')
+    df = pd.read_csv(input_path, encoding='utf-8-sig')
 
     # 1. Remove duplicate rows
     df.drop_duplicates(inplace=True)
@@ -12,20 +13,22 @@ def main():
     df.dropna(axis=1, how='all', inplace=True)
 
     # 3. Clean IMDb Votes (remove commas and convert to numeric)
-    df['IMDb Votes'] = df['IMDb Votes'].replace(',', '', regex=True)
-    df['IMDb Votes'] = pd.to_numeric(df['IMDb Votes'], errors='coerce')
+    if 'IMDb Votes' in df.columns:
+        df['IMDb Votes'] = df['IMDb Votes'].replace(',', '', regex=True)
+        df['IMDb Votes'] = pd.to_numeric(df['IMDb Votes'], errors='coerce')
 
     # 4. Clean Boxoffice: remove $, commas, convert to float; fill missing with 'Unknown'
     def clean_boxoffice(val):
         if pd.isnull(val) or val == '':
             return 'Unknown'
-        val = val.replace('$', '').replace(',', '')
+        val = str(val).replace('$', '').replace(',', '')
         try:
             return float(val)
         except:
             return 'Unknown'
 
-    df['Boxoffice'] = df['Boxoffice'].apply(clean_boxoffice)
+    if 'Boxoffice' in df.columns:
+        df['Boxoffice'] = df['Boxoffice'].apply(clean_boxoffice)
 
     # 5. Standardize Runtime values into minutes
     def convert_runtime(val):
@@ -47,7 +50,8 @@ def main():
         except:
             return np.nan
 
-    df['Runtime'] = df['Runtime'].apply(convert_runtime)
+    if 'Runtime' in df.columns:
+        df['Runtime'] = df['Runtime'].apply(convert_runtime)
 
     # 6. Fill all object-type columns with 'Unknown'
     for col in df.select_dtypes(include='object'):
@@ -64,12 +68,16 @@ def main():
         'Languages', 'Director', 'Writer', 'Tags', 'Hidden Gem Score',
         'Boxoffice', 'Production House', 'Country Availability'
     ]
-    df_cleaned = df[columns_to_keep]
+    columns_present = [col for col in columns_to_keep if col in df.columns]
+    df_cleaned = df[columns_present]
 
     # 9. Save the cleaned CSV
-    df_cleaned.to_csv('imdb_rating_cleaned.csv', index=False, encoding='utf-8-sig')
-    print("Cleaning complete. File saved as imdb_rating_cleaned.csv")
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    df_cleaned.to_csv(output_path, index=False, encoding='utf-8-sig')
+    print(f"Cleaning complete. File saved as {output_path}")
 
 if __name__ == "__main__":
     print("Running cleaning script...")
-    main()
+    input_file = os.environ.get("INPUT_FILE", "/data/imdb_rating.csv")
+    output_file = os.environ.get("OUTPUT_FILE", "/data/imdb_rating_cleaned.csv")
+    clean_file(input_file, output_file)
