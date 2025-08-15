@@ -2,10 +2,7 @@ import pandas as pd
 import numpy as np
 import os
 
-def clean_file(input_path, output_path):
-    # Read the CSV file with UTF-8-SIG encoding
-    df = pd.read_csv(input_path, encoding='utf-8-sig')
-
+def clean_df(df: pd.DataFrame) -> pd.DataFrame:
     # 1. Remove duplicate rows
     df.drop_duplicates(inplace=True)
 
@@ -69,7 +66,12 @@ def clean_file(input_path, output_path):
         'Boxoffice', 'Production House', 'Country Availability'
     ]
     columns_present = [col for col in columns_to_keep if col in df.columns]
-    df_cleaned = df[columns_present]
+    return df[columns_present]
+
+def clean_file(input_path, output_path):
+    # Read the CSV file with UTF-8-SIG encoding
+    df = pd.read_csv(input_path, encoding='utf-8-sig')
+    df_cleaned = clean_df(df)
 
     # 9. Save the cleaned CSV
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
@@ -81,3 +83,4 @@ if __name__ == "__main__":
     input_file = os.environ.get("INPUT_FILE", "/data/imdb_rating.csv")
     output_file = os.environ.get("OUTPUT_FILE", "/data/imdb_rating_cleaned.csv")
     clean_file(input_file, output_file)
+

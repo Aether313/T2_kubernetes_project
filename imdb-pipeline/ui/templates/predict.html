@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Predict</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='externalstylesheet.css') }}">
+</head>
+<body>
+<div class="container">
+    <h2>Predict IMDB Score</h2>
+    <form action="/predict" method="post">
+        Genre: <input type="text" name="Genre" required>
+        Runtime (minutes): <input type="number" name="Runtime (minutes)" required>
+        Language: <input type="text" name="Language" required>
+        Director: <input type="text" name="Director">
+        Writer: <input type="text" name="Writer">
+        Production House: <input type="text" name="Production House">
+        <button type="submit">Predict Me</button>
+    </form>
+
+    {% if prediction %}
+        <h3>Prediction Result:</h3>
+        <p>{{ prediction }}</p>
+    {% endif %}
+
+    <a href="/train_page">Go to Train Page</a>
+</div>
+</body>
+</html>
+
+
+
+

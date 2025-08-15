@@ -1,0 +1,44 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inference-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inference
+  template:
+    metadata:
+      labels:
+        app: inference
+    spec:
+      containers:
+      - name: inference
+        image: yfyyg2005/inference-api:v3
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: DATA_ROOT
+          value: /data
+        ports:
+        - containerPort: 8002  # Match FastAPI's port
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inference-svc
+spec:
+  selector:
+    app: inference
+  ports:
+  - port: 5000        # Internal cluster port
+    targetPort: 8002  # Match containerPort above
+    protocol: TCP
+  type: ClusterIP
+
+
+
+
+
+
+
+

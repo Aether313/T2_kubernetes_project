@@ -15,12 +15,12 @@ spec:
       containers:
       - name: preprocess
         image: preprocess:1.0.0         
-        imagePullPolicy: Never            
+        imagePullPolicy: IfNotPresent    
         env:
         - name: DATA_ROOT
           value: /data
         ports:
-        - containerPort: 8000
+        - containerPort: 8000            
         volumeMounts:
         - name: data-vol
           mountPath: /data
@@ -35,7 +35,7 @@ spec:
       volumes:
       - name: data-vol
         persistentVolumeClaim:
-          claimName: data-pvc            
+          claimName: data-pvc
 ---
 apiVersion: v1
 kind: Service
@@ -44,10 +44,10 @@ metadata:
 spec:
   selector:
     app: preprocess
-  type: NodePort                       
+  type: NodePort
   ports:
   - name: http
     port: 80
     targetPort: 8000
-    nodePort: 30080                   
+    nodePort: 30080          
 
