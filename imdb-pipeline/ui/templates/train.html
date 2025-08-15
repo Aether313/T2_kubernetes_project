@@ -1,19 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>IMDb Training</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet.css') }}">
 </head>
 <body>
-    <h2>Upload CSV to Train Model</h2>
-    <form action="/train" method="post" enctype="multipart/form-data">
-        <input type="file" name="file">
-        <button type="submit">Train Model</button>
-    </form>
-    {% if accuracy %}
-    <p>{{ accuracy }}</p>
-    {% endif %}
-    <a href="/">Go to Predict Page</a>
+    <div class="container">
+        <h2>Upload CSV to Train</h2>
+        <form id="trainForm" action="/train" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" required>
+            <button type="submit">Start Training</button>
+        </form>
 
+        <div id="progress" style="display:none; margin-top:20px;">
+            <p id="status">⏳ Waiting...</p>
+            <div style="width:100%; background:#eee;">
+                <div id="bar" style="width:0%; height:20px; background:green;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById("trainForm");
+        const progressDiv = document.getElementById("progress");
+        const bar = document.getElementById("bar");
+        const status = document.getElementById("status");
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+
+            progressDiv.style.display = "block";
+            status.innerText = "⏳ Uploading and starting training...";
+
+            try {
+                let response = await fetch("/train", {
+                    method: "POST",
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    throw new Error("Training request failed");
+                }
+
+                pollProgress();
+
+            } catch (err) {
+                status.innerText = "❌ Failed to start training: " + err.message;
+            }
+        });
+
+        function pollProgress() {
+            let interval = setInterval(async () => {
+                let res = await fetch("/progress");
+                let data = await res.json();
+
+                if (data.total > 0) {
+                    let percent = Math.round((data.epoch / data.total) * 100);
+                    bar.style.width = percent + "%";
+                    status.innerText = `Epoch ${data.epoch}/${data.total}, Loss = ${data.loss}`;
+
+                    if (data.done) {
+                        clearInterval(interval);
+                        status.innerText = "✅ Training completed!";
+                        bar.style.width = "100%";
+                    }
+                }
+            }, 1000);
+        }
+    </script>
 </body>
 </html>

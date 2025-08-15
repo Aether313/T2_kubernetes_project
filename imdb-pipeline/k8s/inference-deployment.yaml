@@ -14,13 +14,13 @@ spec:
     spec:
       containers:
       - name: inference
-        image: yfyyg2005/inference-api:v3
+        image: yfyyg2005/inference-api:v18
         imagePullPolicy: IfNotPresent
         env:
         - name: DATA_ROOT
           value: /data
         ports:
-        - containerPort: 8002  # Match FastAPI's port
+        - containerPort: 8000   
 ---
 apiVersion: v1
 kind: Service
@@ -30,15 +30,7 @@ spec:
   selector:
     app: inference
   ports:
-  - port: 5000        # Internal cluster port
-    targetPort: 8002  # Match containerPort above
+  - port: 80            
+    targetPort: 8000    
     protocol: TCP
   type: ClusterIP
-
-
-
-
-
-
-
-

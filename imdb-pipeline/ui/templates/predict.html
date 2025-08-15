@@ -6,28 +6,55 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='externalstylesheet.css') }}">
 </head>
 <body>
-<div class="container">
-    <h2>Predict IMDB Score</h2>
-    <form action="/predict" method="post">
-        Genre: <input type="text" name="Genre" required>
-        Runtime (minutes): <input type="number" name="Runtime (minutes)" required>
-        Language: <input type="text" name="Language" required>
-        Director: <input type="text" name="Director">
-        Writer: <input type="text" name="Writer">
-        Production House: <input type="text" name="Production House">
-        <button type="submit">Predict Me</button>
-    </form>
+    <div class="stars"></div>
+    <div class="stars2"></div>
+    <div class="stars3"></div>
 
-    {% if prediction %}
-        <h3>Prediction Result:</h3>
-        <p>{{ prediction }}</p>
-    {% endif %}
+    <div class="container">
+        <h2>Predict IMDB Score</h2>
+        <form action="/predict" method="post">
+            <div class="form-group">
+                <label>IMDb Votes:</label>
+                <input type="number" name="IMDb Votes" required>
+            </div>
+            <div class="form-group">
+                <label>Runtime:</label>
+                <input type="number" name="Runtime" required>
+            </div>
+            <div class="form-group">
+                <label>Hidden Gem Score:</label>
+                <input type="number" name="Hidden Gem Score" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label>Boxoffice:</label>
+                <input type="number" name="Boxoffice" required>
+            </div>
 
-    <a href="/train_page">Go to Train Page</a>
-</div>
+            <div class="form-group">
+                <label>Genre:</label>
+                <input type="text" name="Genre" required>
+            </div>
+            <div class="form-group">
+                <label>Language:</label>
+                <input type="text" name="Language" required>
+            </div>
+            <div class="form-group">
+                <label>Director:</label>
+                <input type="text" name="Director">
+            </div>
+            <div class="form-group">
+                <label>Writer:</label>
+                <input type="text" name="Writer">
+            </div>
+            <button type="submit">Predict Me</button>
+        </form>
+
+        {% if prediction %}
+            <h3>Prediction Result:</h3>
+            <p>{{ prediction }}</p>
+        {% endif %}
+
+        <a href="/train_page">Go to Train Page</a>
+    </div>
 </body>
 </html>
-
-
-
-

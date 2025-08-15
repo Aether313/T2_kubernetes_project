@@ -9,17 +9,16 @@ RUN pip install --no-cache-dir -r requirements.txt \
     && pip install --no-cache-dir tensorflow joblib
 
 # Copy application code
-COPY app.py .
-COPY inference.py .
+COPY inference_api.py .
 
 # Copy models/preproc data
 COPY data /data
 
-# Expose port 8002 for FastAPI
-EXPOSE 8002
+# Expose port 8000 for FastAPI
+EXPOSE 8000
 
 # Start FastAPI using uvicorn
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8002"]
+CMD ["uvicorn", "inference_api:app", "--host", "0.0.0.0", "--port", "8000"]
 
 
 

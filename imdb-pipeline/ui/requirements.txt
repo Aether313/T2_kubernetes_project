@@ -1,2 +1,9 @@
 flask
 requests
+pandas
+tensorflow==2.10.0
+numpy<1.24
+scikit-learn
+fastapi
+pydantic
+uvicorn

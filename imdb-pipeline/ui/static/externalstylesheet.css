@@ -1,25 +1,89 @@
 body {
-    width: 100%;
-    height: 100vh;
     margin: 0;
-    font-family: Arial, sans-serif;
-    font-size: 18px;
+    height: 100vh;
     display: flex;
-    justify-content: center;
     align-items: center;
-    background: linear-gradient(to bottom right, #ffb6c1, #ffe4e1); /* two pretty colors */
+    justify-content: center;
+    font-family: 'Segoe UI', sans-serif;
+    color: white;
+    background: #000;
+    overflow: hidden;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url("https://cdn.eso.org/images/large/eso0932a.jpg") no-repeat center center / cover;
+    z-index: -1;
+    filter: brightness(0.5);
 }
 
 .container {
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     text-align: center;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+    position: relative;
+    z-index: 1;
+    width: 320px;
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
 h2 {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    font-size: 24px;
+    color: #f0f0f0;
+}
+
+input[type="file"],
+input[type="text"],
+input[type="number"],
+button {
+    width: 100%;
+    margin: 6px 0;
+    padding: 8px;
+    background: #222;
+    color: #fff;
+    border: 1px solid #555;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+button {
+    background: linear-gradient(45deg, #6a11cb, #2575fc);
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    padding: 10px;
+}
+button:hover {
+    transform: scale(1.05);
+}
+
+.result {
+    margin-top: 15px;
+    font-size: 18px;
+    color: #76ff7a;
+}
+
+.link {
+    display: inline-block;
+    margin-top: 12px;
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+}
+.link:hover {
+    text-decoration: underline;
 }
 
 form {
@@ -28,26 +92,14 @@ form {
     gap: 10px;
 }
 
-input, button {
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
-button {
-    background-color: #ff7f7f;
-    color: white;
-    cursor: pointer;
-    border: none;
+label {
+    margin-bottom: 4px;
+    font-size: 14px;
+    font-weight: bold;
 }
-
-button:hover {
-    background-color: #ff4f4f;
-}
-
-a {
-    display: inline-block;
-    margin-top: 15px;
-}
-

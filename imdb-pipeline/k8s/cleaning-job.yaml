@@ -14,13 +14,13 @@ spec:
     spec:
       containers:
       - name: preprocess
-        image: preprocess:1.0.0         
+        image: yfyyg2005/clean-api:v26    
         imagePullPolicy: IfNotPresent    
         env:
         - name: DATA_ROOT
           value: /data
         ports:
-        - containerPort: 8000            
+        - containerPort: 8000
         volumeMounts:
         - name: data-vol
           mountPath: /data
@@ -49,5 +49,4 @@ spec:
   - name: http
     port: 80
     targetPort: 8000
-    nodePort: 30080          
-
+    nodePort: 30080

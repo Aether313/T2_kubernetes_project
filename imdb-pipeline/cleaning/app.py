@@ -6,7 +6,7 @@ import os, uuid, io
 import pandas as pd
 import requests
 
-from clean import clean_df
+from clean import clean_df   # custom cleaning logic
 
 app = FastAPI()
 
@@ -58,6 +58,7 @@ async def clean_endpoint(
             raise HTTPException(status_code=400, detail="empty file")
         sep = delimiter or sniff_delimiter(raw[:2048])
         df = pd.read_csv(io.BytesIO(raw), encoding="utf-8-sig", sep=sep)
+
         df_cleaned = clean_df(df)
 
         stem_base = output_name or f"{uuid.uuid4()}_{os.path.splitext(file.filename or 'data')[0]}_cleaned.csv"
@@ -66,15 +67,13 @@ async def clean_endpoint(
         os.makedirs(os.path.dirname(out_path), exist_ok=True)
         df_cleaned.to_csv(out_path, index=False, encoding="utf-8-sig")
 
-        return JSONResponse(
-            {
-                "status": "ok",
-                "cleaned_path": out_path,
-                "filename": os.path.basename(out_path),
-                "rows": int(df_cleaned.shape[0]),
-                "delimiter_used": sep,
-            }
-        )
+        return {
+            "status": "ok",
+            "cleaned_path": out_path,
+            "filename": os.path.basename(out_path),
+            "rows": int(df_cleaned.shape[0]),
+            "delimiter_used": sep,
+        }
     except HTTPException:
         raise
     except Exception as e:
@@ -93,7 +92,6 @@ def train_proxy(req: TrainRequest):
     try:
         if not req.cleaned_path.startswith(DATA_ROOT):
             return JSONResponse({"status": "error", "msg": "cleaned_path must be under DATA_ROOT"}, status_code=400)
-        # Important: training service expects query param ?input_path=...
         r = requests.post(urls["TRAINING_URL"], params={"input_path": req.cleaned_path}, timeout=600)
         return JSONResponse(r.json(), status_code=r.status_code)
     except Exception as e:

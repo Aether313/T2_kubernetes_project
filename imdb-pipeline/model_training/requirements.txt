@@ -1,8 +1,9 @@
 ﻿fastapi
-uvicorn[standard]
+uvicorn
 pandas
-numpy
+numpy<1.24
 scikit-learn
 tensorflow==2.10.0
 matplotlib
+python-multipart
 
