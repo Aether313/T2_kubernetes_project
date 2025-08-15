@@ -1,0 +1,41 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: training-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: training
+  template:
+    metadata:
+      labels:
+        app: training
+    spec:
+      containers:
+      - name: training
+        image: training:1.0.0
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: DATA_ROOT
+          value: /data
+        ports:
+        - containerPort: 8001
+        volumeMounts:
+        - name: data-vol
+          mountPath: /data
+      volumes:
+      - name: data-vol
+        persistentVolumeClaim:
+          claimName: data-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: training-svc
+spec:
+  selector:
+    app: training
+  ports:
+  - port: 80
+    targetPort: 8001

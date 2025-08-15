@@ -1,23 +1,53 @@
 body {
-    width: 1024px;
-    height: 600px;
-    background-color: pink;
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom right, #ffb6c1, #ffe4e1); /* two pretty colors */
 }
 
-h1.header {
-  padding-left: 55px;
+.container {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    text-align: center;
 }
 
-div.block1{
-  width: 570px;
-  border: 2px solid black;
-  margin-left: 500px;
-  height: 600px;
-  margin-top: 40px;
-  background-color: beige;
+h2 {
+    margin-bottom: 20px;
 }
 
-form.input{
-  padding-left: 190px;
-  padding-top: 30px;
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
+
+input, button {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+button {
+    background-color: #ff7f7f;
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+
+button:hover {
+    background-color: #ff4f4f;
+}
+
+a {
+    display: inline-block;
+    margin-top: 15px;
+}
+
