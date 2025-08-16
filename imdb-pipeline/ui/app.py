@@ -62,14 +62,14 @@ def predict():
 
         # 2. Build the EXACT payload the API wants
         payload = {
-            "row": {
-                "Genre": form_data.get('Genre', ''),
-                "Runtime": int(form_data.get('Runtime (minutes)', 0)),
-                "Language": form_data.get('Language', ''),
-                "Director": form_data.get('Director', 'Unknown'),
-                "Writer": form_data.get('Writer', 'Unknown'),
-                "Production House": form_data.get('Production House', 'Unknown')
-            }
+            # "row": {         # test removal, unhide if ineffective
+            "Genre": form_data.get('Genre', ''),
+            "Runtime": int(form_data.get('Runtime (minutes)', 0)),
+            "Language": form_data.get('Language', ''),
+            "Director": form_data.get('Director', 'Unknown'),
+            "Writer": form_data.get('Writer', 'Unknown'),
+            "Production House": form_data.get('Production House', 'Unknown')
+        #    }               # test removal, unhide if ineffective
         }
 
         # 3. Print the payload for debugging (check Kubernetes logs)
@@ -115,3 +115,4 @@ def train():
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000, debug=True)
+
