@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: training
-        image: yfyyg2005/train-api:v41
+        image: yfyyg2005/train-api:v42
         imagePullPolicy: IfNotPresent
         env:
         - name: DATA_ROOT
