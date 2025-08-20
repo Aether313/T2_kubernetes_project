@@ -65,9 +65,10 @@ kubectl apply -f k8s/training-deployment.yaml
 kubectl apply -f k8s/train-service.yaml
 kubectl apply -f k8s/inference-deployment.yaml
 kubectl apply -f k8s/ui-deployment.yaml
-```
+
 Check pods:
 kubectl get pods
+
 
 ### Tech Stack
 
