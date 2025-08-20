@@ -48,21 +48,24 @@ as shown below
 ```bash
 git clone https://github.com/Aether313/T2_kubernetes_project.git
 cd T2_kubernetes_project/imdb-pipeline
+```
 
 ### 2. Run with Docker
 Each service has its own Dockerfile. Example for UI:
+```
 cd ui
 docker build -t imdb-ui .
 docker run -p 5000:5000 imdb-ui
+```
 
-4. Deploy on Kubernetes
+### 3. Deploy on Kubernetes
 Apply the manifests in k8s/:
 kubectl apply -f k8s/cleaning-job.yaml
 kubectl apply -f k8s/training-deployment.yaml
 kubectl apply -f k8s/train-service.yaml
 kubectl apply -f k8s/inference-deployment.yaml
 kubectl apply -f k8s/ui-deployment.yaml
-
+```
 Check pods:
 kubectl get pods
 
