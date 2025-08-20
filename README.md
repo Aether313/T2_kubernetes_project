@@ -37,5 +37,6 @@ The IMDb pipeline automates the following stages:
 
 ##  Project Structure
 as shown below
+
 <img width="225" height="707" alt="image" src="https://github.com/user-attachments/assets/4e4ceb91-5c66-4bb1-94ac-e1ab69897e41" />
 
