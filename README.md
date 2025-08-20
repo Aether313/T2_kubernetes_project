@@ -1,5 +1,4 @@
-# T2_kubernetes_project
-# IMDb Score Prediction Pipeline 
+# T2_kubernetes_project IMDb Score Prediction Pipeline 
 
 This project implements an end-to-end **machine learning pipeline** to predict IMDb scores of movies using features such as cast, director, writer, country availability, and box office data. The pipeline is containerized with **Docker** and orchestrated with **Kubernetes** for scalable deployment.
 
