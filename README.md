@@ -38,5 +38,56 @@ The IMDb pipeline automates the following stages:
 ##  Project Structure
 as shown below
 
-<img width="225" height="707" alt="image" src="https://github.com/user-attachments/assets/4e4ceb91-5c66-4bb1-94ac-e1ab69897e41" />
+imdb-pipeline/
+  cleaning/
+    app.py
+    clean.py
+    Dockerfile
+    requirements.txt
+  feature_engineering/
+    Dockerfile
+    features.py
+  inference_api/
+    Dockerfile
+    inference_api.py
+    requirements.txt
+    data/
+      imdb_rating.csv
+      imdb_rating_cleaned.csv
+      models/
+        best_model.h5
+        model.h5
+        preproc.pkl
+  k8s/
+    cleaning-job.yaml
+    inference-deployment.yaml
+    pvc.yaml
+    train-service.yaml
+    training-deployment.yaml
+    ui-deployment.yaml
+  model_training/
+    app.py
+    Dockerfile
+    model_training.py
+    requirements.txt
+  ui/
+    app.py
+    Dockerfile
+    requirements.txt
+    static/
+      externalstylesheet.css
+      stylesheet.css
+    templates/
+      predict.html
+      train.html
+
+---
+
+## ⚙️ Setup Instructions
+
+### 1. Clone Repository
+```bash
+git clone https://github.com/Aether313/T2_kubernetes_project.git
+cd T2_kubernetes_project/imdb-pipeline
+
 
