@@ -1,3 +1,56 @@
+# done by edric
+# # # app.py
+# #
+# from flask import Flask, request, jsonify, render_template
+# import joblib
+# import numpy as np
+#
+# # Create the Flask application instance
+# app = Flask(__name__)
+#
+# # Load the pre-trained model
+# # The model should be saved in the same directory as this file
+# model = joblib.load("best_model.h5")
+#
+# # Define the home route
+# @app.route('/')
+# def home():
+#     # This renders an HTML page if you have a templates folder
+#     # For a simple API, you might not need this.
+#     return "<h1>Flask API for Model Inference</h1><p>Send a POST request to /predict to get a prediction.</p>"
+#
+# # Define the prediction endpoint
+# @app.route('/predict', methods=['POST'])
+# def predict():
+#     try:
+#         # Get the JSON data from the request
+#         data = request.get_json(force=True)
+#
+#         # Assuming the incoming data is a list of features, e.g., {'features': [1.2, 3.4, 5.6]}
+#         features = np.array(data['features']).reshape(1, -1)
+#
+#         # Make a prediction using the loaded model
+#         prediction = model.predict(features)
+#
+#         # Convert the prediction to a list or a single value for JSON serialization
+#         prediction_list = prediction.tolist()
+#
+#         # Return the prediction as a JSON response
+#         return jsonify({
+#             'prediction': prediction_list
+#         })
+#
+#     except Exception as e:
+#         return jsonify({
+#             'error': str(e)
+#         })
+#
+# if __name__ == '__main__':
+#     # Run the application
+#     app.run(debug=True)
+
+
+
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import pandas as pd
