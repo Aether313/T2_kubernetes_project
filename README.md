@@ -36,3 +36,45 @@ The IMDb pipeline automates the following stages:
 ---
 
 ##  Project Structure
+imdb-pipeline/
+│
+├── cleaning/ # Data preprocessing
+│ └── clean.py
+│ └── app.py
+│ ├── requirements.txt
+│ └── Dockerfile
+│
+├── model_training/ # ML model training
+│ ├── model_training.py
+│ ├── app.py
+│ ├── requirements.txt
+│ └── Dockerfile
+│
+├── inference_api/ # Inference
+│ ├── inference_api.py
+│ ├── app.py
+│ └── Dockerfile
+│ ├── Data
+│ │ └── Models
+│ │ │ └── preproc.pkl
+│ │ │ └── model.h5
+│ │ │ └── best_model.h5
+│ 
+├── ui/ # Frontend user interface
+│ ├── app.py
+│ ├── templates/
+│ │ ├── train.html
+│ │ └── predict.html
+│ └── static/
+│ └── externalstylesheet.css
+│ └── stylesheet.css
+│
+├── k8s/ # Kubernetes deployment files
+│ ├── cleaning-job.yaml
+│ ├── training-deployment.yaml
+│ ├── inference-deployment.yaml
+│ └── ui-deployment.yaml
+│ └── train-service.yaml
+│ └── pvc.yaml
+│
+└── README.md
