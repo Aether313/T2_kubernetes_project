@@ -84,7 +84,7 @@ Orchestration: Kubernetes (YAML-based deployment)
 
 UI: HTML, CSS, Flask templates
 
-Future Improvements
+### Future Improvements
 
 Add more advanced models (XGBoost, Ensemble Learning).
 
