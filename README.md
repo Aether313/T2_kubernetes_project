@@ -42,11 +42,51 @@ as shown below
 
 ---
 
-## ⚙️ Setup Instructions
+## ⚙️ Setup Instructions 
 
 ### 1. Clone Repository
 ```bash
 git clone https://github.com/Aether313/T2_kubernetes_project.git
 cd T2_kubernetes_project/imdb-pipeline
 
+### 2. Run with Docker
+Each service has its own Dockerfile. Example for UI:
+cd ui
+docker build -t imdb-ui .
+docker run -p 5000:5000 imdb-ui
+
+4. Deploy on Kubernetes
+Apply the manifests in k8s/:
+kubectl apply -f k8s/cleaning-job.yaml
+kubectl apply -f k8s/training-deployment.yaml
+kubectl apply -f k8s/train-service.yaml
+kubectl apply -f k8s/inference-deployment.yaml
+kubectl apply -f k8s/ui-deployment.yaml
+
+Check pods:
+kubectl get pods
+
+### Tech Stack
+
+Programming Language: Python
+
+Frameworks: Flask, TensorFlow/Keras
+
+Data Handling: Pandas, NumPy, Scikit-learn
+
+Containerization: Docker
+
+Orchestration: Kubernetes (YAML-based deployment)
+
+UI: HTML, CSS, Flask templates
+
+Future Improvements
+
+Add more advanced models (XGBoost, Ensemble Learning).
+
+Having a better saved model with better algorithm.
+
+Enhance data pipeline with real-time updates.
+
+Deploy on cloud providers (AWS/GCP/Azure) with CI/CD.
 
