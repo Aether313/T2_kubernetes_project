@@ -69,6 +69,39 @@ kubectl apply -f k8s/ui-deployment.yaml
 Check pods:
 kubectl get pods
 
+You will see something like this:
+NAME                                 READY   STATUS             RESTARTS        AGE
+inference-deploy-65bbb85f76-rwt9x    1/1     Running            0               15h
+preprocess-deploy-64f9464696-8x676   1/1     Running            0               20h
+training-deploy-5ddb986b5c-mzg92     1/1     Running            0               19h
+ui-deploy-546cc58f95-psllq           1/1     Running            0               16h
+
+### Screenshots
+<img width="1913" height="967" alt="image" src="https://github.com/user-attachments/assets/688cddfb-6662-4152-9e11-6876315eada6" />
+<img width="1918" height="963" alt="image" src="https://github.com/user-attachments/assets/55aca3c9-da42-4b56-ba6a-e51aad100caa" />
+
+
+### API Endpoints (for inference service)
+
+Right now, someone looking at the repo won’t know how to call your inference API directly.
+You could add:
+
+POST /predict
+Content-Type: application/json
+
+{
+  "title": "Inception",
+  "director": "Christopher Nolan",
+  "cast": "Leonardo DiCaprio",
+  "box_office": 829895144,
+  "country": "USA"
+}
+
+Response
+
+{
+  "predicted_rating": 8.7
+}
 
 ### Tech Stack
 
